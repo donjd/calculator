@@ -21,24 +21,33 @@ main {
     padding: 10px;
     height: fit-content;
     border-radius: 10px;
+    margin-top: 20px;
 }
 
 .display-container {
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
+    align-items: flex-end;
+    background-color: white;
 }
 
+
+
 #display {
-    background-color: white;
-    border: 1px solid black;
-    margin: 10px;
+    border: none;
     text-align: right;
     flex: 1 1 auto;
     font-size: 4rem;
-    width: 0px;
+    width: 250px;
 }
 
-.buttons {
+input:focus{
+    border: none;
+    outline: none;
+}
+
+.buttons { 
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -59,7 +68,13 @@ button {
     border-radius: 5px;
     text-align: center;
     /* display: inline-block; */
-    background-color: hsl(199, 100%, 73%);
+    background-color: hsl(342, 91%, 69%);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: hsl(0, 0%, 100%);
 }
 
 button:hover {
@@ -71,7 +86,8 @@ button:active {
 }
 
 .symbol-btn {
-    background-color: hsl(276, 100%, 71%);
+    background-color: hsl(290, 100%, 69%);
+    color: white;
 }
 
 .symbol-btn:hover {
@@ -83,7 +99,7 @@ button:active {
 }
 
 #equal-btn {
-    background-color: hsl(22, 100%, 68%);
+    background-color: hsl(22, 98%, 62%);
 }
 
 #equal-btn:hover {
