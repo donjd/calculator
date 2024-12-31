@@ -1,0 +1,95 @@
+html {
+    font-size: 10px;
+}
+
+main {
+    border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+#calculator {
+    border: 2px solid red;
+    background-color: rgb(22, 50, 63);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: fit-content;
+    border-radius: 10px;
+}
+
+.display-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#display {
+    background-color: white;
+    border: 1px solid black;
+    margin: 10px;
+    text-align: right;
+    flex: 1 1 auto;
+    font-size: 4rem;
+    width: 0px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.row {
+    display: flex;
+    text-align: center;
+}
+
+button {
+    width: 10px;
+    height: 10px;
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #cfcfcf;
+    border-radius: 5px;
+    text-align: center;
+    /* display: inline-block; */
+    background-color: hsl(199, 100%, 73%);
+}
+
+button:hover {
+    background-color: hsl(199, 100%, 80%);
+}
+
+button:active {
+    background-color: hsl(199, 100%, 85%);
+}
+
+.symbol-btn {
+    background-color: hsl(276, 100%, 71%);
+}
+
+.symbol-btn:hover {
+    background-color: hsl(276, 100%, 80%);
+}
+
+.symbol-btn:active {
+    background-color: hsl(276, 100%, 85%);
+}
+
+#equal-btn {
+    background-color: hsl(22, 100%, 68%);
+}
+
+#equal-btn:hover {
+    background-color:hsl(22, 100%, 75%);
+}
+
+#equal-btn:active {
+    background-color: hsl(22, 100%, 80%);
+}
