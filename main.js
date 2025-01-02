@@ -5,7 +5,7 @@ const display = document.querySelector("#display");
 //row one buttons
 const leftParenthesis = document.querySelector("#left-parenthesis-btn");
 const rigthParenthesis = document.querySelector("#right-parenthesis-btn");
-const percent = document.querySelector("#percent-btn");
+const power = document.querySelector("#power-btn");
 const clearBtn = document.querySelector("#clear-btn");
 
 //row two buttons
@@ -32,4 +32,60 @@ const zero = document.querySelector("#zero-btn");
 const equal = document.querySelector("#equal-btn");
 const plusBtn = document.querySelector("#plus-btn");
 
-//math functions
+//
+const input = [];
+let inputDisplay = "";
+
+one.addEventListener("click", (e) => {
+  input.push(1);
+  inputDisplay += "1";
+  display.textContent = inputDisplay;
+});
+two.addEventListener("click", (e) => {
+  input.push(2);
+  inputDisplay += "2";
+  display.textContent = inputDisplay;
+});
+three.addEventListener("click", (e) => {
+  input.push(3);
+  inputDisplay += "3";
+  display.textContent = inputDisplay;
+});
+four.addEventListener("click", (e) => {
+  input.push(4);
+  inputDisplay += "4";
+  display.textContent = inputDisplay;
+});
+five.addEventListener("click", (e) => {
+  input.push(5);
+  inputDisplay += "5";
+  display.textContent = inputDisplay;
+});
+six.addEventListener("click", (e) => {
+  input.push(6);
+  inputDisplay += "6";
+  display.textContent = inputDisplay;
+});
+seven.addEventListener("click", (e) => {
+  input.push(7);
+  inputDisplay += "7";
+  display.textContent = inputDisplay;
+});
+
+eight.addEventListener("click", (e) => {
+  input.push(8);
+  inputDisplay += "8";
+  display.textContent = inputDisplay;
+});
+
+nine.addEventListener("click", (e) => {
+  input.push(9);
+  inputDisplay += "9";
+  display.textContent = inputDisplay;
+});
+
+plusBtn.addEventListener("click", () => {
+  history.textContent = `${inputDisplay} +`;
+  inputDisplay = 0;
+  display.textContent = inputDisplay;
+});
