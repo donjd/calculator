@@ -33,6 +33,7 @@ const equal = document.querySelector("#equal-btn");
 const plusBtn = document.querySelector("#plus-btn");
 
 const numBtns = document.querySelectorAll(".num-btn");
+const operatorBtns = document.querySelectorAll(".operator-btn");
 
 //
 let operator = "";
@@ -41,10 +42,18 @@ let result = 0;
 let stringOfNums = "";
 let realNums = 0;
 
+const formatter = new Intl.NumberFormat("en-us");
+let formattedNum = "";
+
 function displayNumbers(e) {
   stringOfNums += e.target.textContent;
-  realNums = Number(stringOfNums);
-  display.textContent = realNums;
+  realNums = parseFloat(stringOfNums);
+  formattedNum = formatter.format(realNums);
+  display.textContent = formattedNum;
+}
+
+function displayHistory(e) {
+  history.textContent = `${formattedNum} ${e.target.textContent}`;
 }
 
 numBtns.forEach((element) =>
@@ -53,18 +62,20 @@ numBtns.forEach((element) =>
   })
 );
 
+operatorBtns.forEach((element) =>
+  element.addEventListener("click", (e) => {
+    displayHistory(e);
+  })
+);
+
 //symbol buttons
-divideBtn.addEventListener("click", () => {
-  history.textContent = `${inputDisplay} +`;
-  inputDisplay = 0;
-  display.textContent = inputDisplay;
-  operator = "/";
+divideBtn.addEventListener("click", (e) => {
+  operator = "÷";
+  history.textContent = `${formattedNum} ${e.target.textContent}`;
 });
-multiplyBtn.addEventListener("click", () => {
-  history.textContent = `${inputDisplay} x`;
-  inputDisplay = 0;
-  display.textContent = inputDisplay;
-  operator = "*";
+multiplyBtn.addEventListener("click", (e) => {
+  operator = "x";
+  history.textContent = `${formattedNum} ${e.target.textContent}`;
 });
 minusBtn.addEventListener("click", () => {
   history.textContent = `${inputDisplay} -`;
@@ -85,10 +96,10 @@ equal.addEventListener("click", () => {
 
 function calculateResult(firstNum, secondNum) {
   switch (operator) {
-    case "/":
+    case "÷":
       return (result = firstNum / secondNum);
       break;
-    case "*":
+    case "x":
       return (result = firstNum * secondNum);
       break;
     case "-":
