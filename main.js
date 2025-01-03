@@ -35,7 +35,10 @@ const plusBtn = document.querySelector("#plus-btn");
 //
 const input = [];
 let inputDisplay = "";
+let operator = "";
+let result = 0;
 
+//number buttons
 one.addEventListener("click", (e) => {
   input.push(1);
   inputDisplay += "1";
@@ -71,21 +74,68 @@ seven.addEventListener("click", (e) => {
   inputDisplay += "7";
   display.textContent = inputDisplay;
 });
-
 eight.addEventListener("click", (e) => {
   input.push(8);
   inputDisplay += "8";
   display.textContent = inputDisplay;
 });
-
 nine.addEventListener("click", (e) => {
   input.push(9);
   inputDisplay += "9";
   display.textContent = inputDisplay;
 });
 
+//symbol buttons
+divideBtn.addEventListener("click", () => {
+  history.textContent = `${inputDisplay} +`;
+  inputDisplay = 0;
+  display.textContent = inputDisplay;
+  operator = "/";
+});
+multiplyBtn.addEventListener("click", () => {
+  history.textContent = `${inputDisplay} x`;
+  inputDisplay = 0;
+  display.textContent = inputDisplay;
+  operator = "*";
+});
+minusBtn.addEventListener("click", () => {
+  history.textContent = `${inputDisplay} -`;
+  inputDisplay = 0;
+  display.textContent = inputDisplay;
+  operator = "-";
+});
 plusBtn.addEventListener("click", () => {
   history.textContent = `${inputDisplay} +`;
   inputDisplay = 0;
   display.textContent = inputDisplay;
+  operator = "+";
+});
+equal.addEventListener("click", () => {
+  calculateResult(5, 6);
+  display.textContent = result;
+});
+
+function calculateResult(firstNum, secondNum) {
+  switch (operator) {
+    case "/":
+      return (result = firstNum / secondNum);
+      break;
+    case "*":
+      return (result = firstNum * secondNum);
+      break;
+    case "-":
+      return (result = firstNum - secondNum);
+      break;
+    case "+":
+      return (result = firstNum + secondNum);
+      break;
+  }
+}
+
+calculateResult(5, 6);
+
+const nums = ["1", "2", "3"];
+let numsResult = 0;
+const numsTogether = nums.reduce((acc, curr) => {
+  return (acc += curr);
 });
