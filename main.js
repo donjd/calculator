@@ -33,56 +33,48 @@ const equal = document.querySelector("#equal-btn");
 const plusBtn = document.querySelector("#plus-btn");
 
 //
-const input = [];
-let inputDisplay = "";
 let operator = "";
 let result = 0;
 
-//number buttons
+let stringOfNums = "";
+let realNums = 0;
+
+function displayNumbers(e) {
+  stringOfNums += e.target.textContent;
+  realNums = Number(stringOfNums);
+  display.textContent = realNums;
+}
+
+// number buttons
+zero.addEventListener("click", (e) => {
+  displayNumbers(e);
+});
 one.addEventListener("click", (e) => {
-  input.push(1);
-  inputDisplay += "1";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 two.addEventListener("click", (e) => {
-  input.push(2);
-  inputDisplay += "2";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 three.addEventListener("click", (e) => {
-  input.push(3);
-  inputDisplay += "3";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 four.addEventListener("click", (e) => {
-  input.push(4);
-  inputDisplay += "4";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 five.addEventListener("click", (e) => {
-  input.push(5);
-  inputDisplay += "5";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 six.addEventListener("click", (e) => {
-  input.push(6);
-  inputDisplay += "6";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 seven.addEventListener("click", (e) => {
-  input.push(7);
-  inputDisplay += "7";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 eight.addEventListener("click", (e) => {
-  input.push(8);
-  inputDisplay += "8";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 nine.addEventListener("click", (e) => {
-  input.push(9);
-  inputDisplay += "9";
-  display.textContent = inputDisplay;
+  displayNumbers(e);
 });
 
 //symbol buttons
