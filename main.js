@@ -36,24 +36,31 @@ const numBtns = document.querySelectorAll(".num-btn");
 const operatorBtns = document.querySelectorAll(".operator-btn");
 
 //
+let firstNumber = "";
+let secondNumber = "";
 let operator = "";
 let result = 0;
 
+let numbersInputCounter = 1;
+
 let stringOfNums = "";
 let realNums = 0;
-
 const formatter = new Intl.NumberFormat("en-us");
-let formattedNum = "";
 
 function displayNumbers(e) {
   stringOfNums += e.target.textContent;
   realNums = parseFloat(stringOfNums);
-  formattedNum = formatter.format(realNums);
-  display.textContent = formattedNum;
+  firstNumber = formatter.format(realNums);
+  display.textContent = firstNumber;
 }
 
 function displayHistory(e) {
-  history.textContent = `${formattedNum} ${e.target.textContent}`;
+  history.textContent = `${firstNumber} ${e.target.textContent}`;
+}
+
+function saveNumber(e) {
+  firstNumber = realNums;
+  console.log(firstNumber);
 }
 
 numBtns.forEach((element) =>
@@ -65,34 +72,15 @@ numBtns.forEach((element) =>
 operatorBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
     displayHistory(e);
+    saveNumber(e);
+    stringOfNums = "";
+    realNums = 0;
+    display.textContent = 0;
+    console.log(firstNumber);
   })
 );
 
-//symbol buttons
-divideBtn.addEventListener("click", (e) => {
-  operator = "÷";
-  history.textContent = `${formattedNum} ${e.target.textContent}`;
-});
-multiplyBtn.addEventListener("click", (e) => {
-  operator = "x";
-  history.textContent = `${formattedNum} ${e.target.textContent}`;
-});
-minusBtn.addEventListener("click", () => {
-  history.textContent = `${inputDisplay} -`;
-  inputDisplay = 0;
-  display.textContent = inputDisplay;
-  operator = "-";
-});
-plusBtn.addEventListener("click", () => {
-  history.textContent = `${inputDisplay} +`;
-  inputDisplay = 0;
-  display.textContent = inputDisplay;
-  operator = "+";
-});
-equal.addEventListener("click", () => {
-  calculateResult(5, 6);
-  display.textContent = result;
-});
+//set let
 
 function calculateResult(firstNum, secondNum) {
   switch (operator) {
@@ -110,11 +98,3 @@ function calculateResult(firstNum, secondNum) {
       break;
   }
 }
-
-calculateResult(5, 6);
-
-const nums = ["1", "2", "3"];
-let numsResult = 0;
-const numsTogether = nums.reduce((acc, curr) => {
-  return (acc += curr);
-});
