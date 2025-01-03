@@ -32,6 +32,8 @@ const zero = document.querySelector("#zero-btn");
 const equal = document.querySelector("#equal-btn");
 const plusBtn = document.querySelector("#plus-btn");
 
+const numBtns = document.querySelectorAll(".num-btn");
+
 //
 let operator = "";
 let result = 0;
@@ -45,37 +47,11 @@ function displayNumbers(e) {
   display.textContent = realNums;
 }
 
-// number buttons
-zero.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-one.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-two.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-three.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-four.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-five.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-six.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-seven.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-eight.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
-nine.addEventListener("click", (e) => {
-  displayNumbers(e);
-});
+numBtns.forEach((element) =>
+  element.addEventListener("click", (e) => {
+    displayNumbers(e);
+  })
+);
 
 //symbol buttons
 divideBtn.addEventListener("click", () => {
