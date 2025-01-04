@@ -38,20 +38,27 @@ const operatorBtns = document.querySelectorAll(".operator-btn");
 //
 let stringOfNums = "";
 const formatter = new Intl.NumberFormat("en-us");
+let displayNumber = "";
 
 let operand = 0;
 let operator = "";
 let result = 0;
 
+let isFirstInput = true;
+
 function displayNumbers(e) {
   stringOfNums += e.target.textContent;
   operand = parseFloat(stringOfNums);
-  let displayNumber = formatter.format(operand);
+  displayNumber = formatter.format(operand);
   display.textContent = displayNumber;
 }
 
 function displayHistory(e) {
-  history.textContent = `${displayNumber} ${e.target.textContent}`;
+  if (isFirstInput) {
+    history.textContent = `${operand} ${operator}`;
+  } else {
+    history.textContent = `${result} ${operator}`;
+  }
 }
 
 numBtns.forEach((element) =>
@@ -62,30 +69,53 @@ numBtns.forEach((element) =>
 
 operatorBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
+    operator = e.target.textContent;
+    calculateResult();
     displayHistory(e);
-    saveNumber(e);
-    stringOfNums = "";
-    realNums = 0;
-    display.textContent = 0;
-    console.log(displayNumber);
+    isFirstInput = false;
   })
 );
 
-//set let
-
-function calculateResult(firstNum, secondNum) {
+function calculateResult() {
   switch (operator) {
     case "÷":
-      return (result = firstNum / secondNum);
+      result = result / operand;
       break;
     case "x":
-      return (result = firstNum * secondNum);
+      result = result * operand;
       break;
     case "-":
-      return (result = firstNum - secondNum);
+      if (isFirstInput) {
+        result = operand;
+        displayNumber = result;
+        stringOfNums = "";
+      } else {
+        result = result - operand;
+        displayNumber = result;
+        stringOfNums = "";
+      }
       break;
     case "+":
-      return (result = firstNum + secondNum);
+      result = result + operand;
+      displayNumber = result;
+      stringOfNums = "";
       break;
   }
 }
+
+clearBtn.addEventListener("click", (e) => {
+  isFirstInput = true;
+  stringOfNums = "";
+  displayNumber = "";
+  operand = 0;
+  operator = "";
+  result = 0;
+  display.textContent = 0;
+  history.textContent = 0;
+});
+
+equal.addEventListener("click", () => {
+  calculateResult();
+  history.textContent = 0;
+  display.textContent = result;
+});
