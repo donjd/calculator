@@ -39,14 +39,14 @@ const operatorBtns = document.querySelectorAll(".operator-btn");
 let stringOfNums = "";
 const formatter = new Intl.NumberFormat("en-us");
 
-let displayNumber = "";
+let operand = 0;
 let operator = "";
 let result = 0;
 
 function displayNumbers(e) {
   stringOfNums += e.target.textContent;
   operand = parseFloat(stringOfNums);
-  displayNumber = formatter.format(operand);
+  let displayNumber = formatter.format(operand);
   display.textContent = displayNumber;
 }
 
