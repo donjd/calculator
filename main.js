@@ -36,31 +36,22 @@ const numBtns = document.querySelectorAll(".num-btn");
 const operatorBtns = document.querySelectorAll(".operator-btn");
 
 //
-let firstNumber = "";
-let secondNumber = "";
+let stringOfNums = "";
+const formatter = new Intl.NumberFormat("en-us");
+
+let displayNumber = "";
 let operator = "";
 let result = 0;
 
-let numbersInputCounter = 1;
-
-let stringOfNums = "";
-let realNums = 0;
-const formatter = new Intl.NumberFormat("en-us");
-
 function displayNumbers(e) {
   stringOfNums += e.target.textContent;
-  realNums = parseFloat(stringOfNums);
-  firstNumber = formatter.format(realNums);
-  display.textContent = firstNumber;
+  operand = parseFloat(stringOfNums);
+  displayNumber = formatter.format(operand);
+  display.textContent = displayNumber;
 }
 
 function displayHistory(e) {
-  history.textContent = `${firstNumber} ${e.target.textContent}`;
-}
-
-function saveNumber(e) {
-  firstNumber = realNums;
-  console.log(firstNumber);
+  history.textContent = `${displayNumber} ${e.target.textContent}`;
 }
 
 numBtns.forEach((element) =>
@@ -76,7 +67,7 @@ operatorBtns.forEach((element) =>
     stringOfNums = "";
     realNums = 0;
     display.textContent = 0;
-    console.log(firstNumber);
+    console.log(displayNumber);
   })
 );
 
