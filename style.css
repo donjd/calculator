@@ -25,6 +25,7 @@ main {
     align-items: center;
     width: fit-content;
     height: fit-content;
+    max-width: 300px;
 }
 
 .display-container {

@@ -36,7 +36,7 @@ const numBtns = document.querySelectorAll(".num-btn");
 const operatorBtns = document.querySelectorAll(".operator-btn");
 
 //
-let stringOfNums = "";
+let stringOfDigits = "";
 const formatter = new Intl.NumberFormat("en-us");
 let numberWithCommas = "";
 
@@ -48,37 +48,54 @@ let isFirstInput = true;
 
 numBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
-    appendNumber(e);
+    appendDigit(e);
     convertToNumber(e);
-    displayNumbersWithCommas(e);
+    displayNumberWithCommas(e);
   })
 );
+
+function appendDigit(e) {
+  stringOfDigits += e.target.textContent;
+}
+
+function convertToNumber() {
+  operand = parseFloat(stringOfDigits);
+}
+
+function displayNumberWithCommas() {
+  numberWithCommas = formatter.format(stringOfDigits);
+  display.textContent = numberWithCommas;
+}
 
 operatorBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
     operator = e.target.textContent;
     calculateResult();
-    displayHistory(e);
+    // displayHistory(e);
     isFirstInput = false;
   })
 );
 
-function appendNumber(e) {
-  stringOfNums += e.target.textContent;
+function calculateResult() {
+  switch (operator) {
+    case "+":
+      if (isFirstInput) {
+        result = operand;
+        resetOperand();
+        result = result + operand;
+      } else {
+        result = result + operand;
+        resetOperand();
+      }
+
+      break;
+  }
 }
 
-function convertToNumber() {
-  operand = parseFloat(stringOfNums);
-}
-
-function displayNumbersWithCommas(stringOfNums) {
-  numberWithCommas = formatter.format(stringOfNums);
-  display.textContent = numberWithCommas;
-}
-
-function displayNumbersWithCommas(operand) {
-  numberWithCommas = formatter.format(operand);
-  display.textContent = numberWithCommas;
+function resetOperand() {
+  stringOfDigits = "";
+  operand = 0;
+  numberWithCommas = "";
 }
 
 function displayHistory(e) {
@@ -89,47 +106,21 @@ function displayHistory(e) {
   }
 }
 
-function calculateResult() {
-  secondOperand = 0;
-  switch (operator) {
-    case "÷":
-      result = result / operand;
-      break;
-    case "x":
-      result = result * operand;
-      break;
-    case "-":
-      if (isFirstInput) {
-        result = operand;
-        numberWithCommas = result;
-        stringOfNums = "";
-      } else {
-        result = result - operand;
-        numberWithCommas = result;
-        stringOfNums = "";
-      }
-      break;
-    case "+":
-      result = result + operand;
-      break;
-  }
-}
+equal.addEventListener("click", () => {
+  calculateResult();
+  history.textContent = result;
+  display.textContent = result;
+});
 
 clearBtn.addEventListener("click", (e) => {
   isFirstInput = true;
-  stringOfNums = "";
+  stringOfDigits = "";
   numberWithCommas = "";
   operand = 0;
   operator = "";
   result = 0;
   display.textContent = 0;
   history.textContent = 0;
-});
-
-equal.addEventListener("click", () => {
-  calculateResult();
-  history.textContent = 0;
-  display.textContent = result;
 });
 
 //functional goals
