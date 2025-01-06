@@ -38,7 +38,7 @@ const operatorBtns = document.querySelectorAll(".operator-btn");
 //
 let stringOfNums = "";
 const formatter = new Intl.NumberFormat("en-us");
-let displayNumber = "";
+let numberWithCommas = "";
 
 let operand = 0;
 let operator = "";
@@ -46,24 +46,11 @@ let result = 0;
 
 let isFirstInput = true;
 
-function displayNumbers(e) {
-  stringOfNums += e.target.textContent;
-  operand = parseFloat(stringOfNums);
-  displayNumber = formatter.format(operand);
-  display.textContent = displayNumber;
-}
-
-function displayHistory(e) {
-  if (isFirstInput) {
-    history.textContent = `${operand} ${operator}`;
-  } else {
-    history.textContent = `${result} ${operator}`;
-  }
-}
-
 numBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
-    displayNumbers(e);
+    appendNumber(e);
+    convertToNumber(e);
+    displayNumbersWithCommas(e);
   })
 );
 
@@ -76,7 +63,34 @@ operatorBtns.forEach((element) =>
   })
 );
 
+function appendNumber(e) {
+  stringOfNums += e.target.textContent;
+}
+
+function convertToNumber() {
+  operand = parseFloat(stringOfNums);
+}
+
+function displayNumbersWithCommas(stringOfNums) {
+  numberWithCommas = formatter.format(stringOfNums);
+  display.textContent = numberWithCommas;
+}
+
+function displayNumbersWithCommas(operand) {
+  numberWithCommas = formatter.format(operand);
+  display.textContent = numberWithCommas;
+}
+
+function displayHistory(e) {
+  if (isFirstInput) {
+    history.textContent = `${operand} ${operator}`;
+  } else {
+    history.textContent = `${result} ${operator}`;
+  }
+}
+
 function calculateResult() {
+  secondOperand = 0;
   switch (operator) {
     case "÷":
       result = result / operand;
@@ -87,26 +101,16 @@ function calculateResult() {
     case "-":
       if (isFirstInput) {
         result = operand;
-        displayNumber = result;
+        numberWithCommas = result;
         stringOfNums = "";
       } else {
         result = result - operand;
-        displayNumber = result;
+        numberWithCommas = result;
         stringOfNums = "";
       }
       break;
     case "+":
-      if (isFirstInput) {
-        result = operand;
-        displayNumber = result;
-        stringOfNums = "";
-        operand = 0;
-      } else {
-        result = result + operand;
-        display.textContent = result;
-        stringOfNums = "";
-      }
-
+      result = result + operand;
       break;
   }
 }
@@ -114,7 +118,7 @@ function calculateResult() {
 clearBtn.addEventListener("click", (e) => {
   isFirstInput = true;
   stringOfNums = "";
-  displayNumber = "";
+  numberWithCommas = "";
   operand = 0;
   operator = "";
   result = 0;
