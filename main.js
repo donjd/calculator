@@ -97,7 +97,7 @@ function calculateResult() {
       break;
     case "+":
       result = result + operand;
-      displayNumber = result;
+      display.textContent = result;
       stringOfNums = "";
       break;
   }
@@ -119,3 +119,26 @@ equal.addEventListener("click", () => {
   history.textContent = 0;
   display.textContent = result;
 });
+
+//functional goals
+
+//display the first input number
+//press operator
+//display a "history" above the number with the result and then the operator
+//also display the result in the main display
+//when you type another number, replace the result with the new operand
+//
+
+//basicaly, the only difference in hitting an operator and the equals button is how the "history" is displayed
+//when you hit equals, the history displays the last two operands and the operator
+//if you hit just an operator, it still solves the problem, but only displays the first operand in history and
+//the second one in the main diplay
+
+//pseudo code
+
+//input number
+//press operator
+//save first input number as the result
+//
+
+//could try adding a new variable inside of the functions for first operand(result) and operand.
