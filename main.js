@@ -96,9 +96,17 @@ function calculateResult() {
       }
       break;
     case "+":
-      result = result + operand;
-      display.textContent = result;
-      stringOfNums = "";
+      if (isFirstInput) {
+        result = operand;
+        displayNumber = result;
+        stringOfNums = "";
+        operand = 0;
+      } else {
+        result = result + operand;
+        display.textContent = result;
+        stringOfNums = "";
+      }
+
       break;
   }
 }
