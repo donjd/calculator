@@ -46,6 +46,7 @@ let operator = "";
 let result = 0;
 
 let isFirstInput = true;
+let pressedEqual = false;
 
 numBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
@@ -84,12 +85,28 @@ function calculateResult() {
       if (isFirstInput) {
         result = operand;
         resetOperand();
-        result = result + operand;
       } else {
         result = result + operand;
         resetOperand();
       }
-
+      break;
+    case "-":
+      if (isFirstInput) {
+        result = operand;
+        resetOperand();
+      } else {
+        result = result - operand;
+        resetOperand();
+      }
+      break;
+    case "x":
+      if (isFirstInput) {
+        result = operand;
+        resetOperand();
+      } else {
+        result = result * operand;
+        resetOperand();
+      }
       break;
   }
 }
@@ -111,9 +128,11 @@ equal.addEventListener("click", () => {
   calculateResult();
   resultWithCommas = displayNumberWithCommas(result);
   display.textContent = resultWithCommas;
+  operand = "";
+  pressedEqual = true;
 });
 
-clearBtn.addEventListener("click", (e) => {
+clearBtn.addEventListener("click", () => {
   isFirstInput = true;
   stringOfDigits = "";
   numberWithCommas = "";
