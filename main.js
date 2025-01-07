@@ -38,7 +38,8 @@ const operatorBtns = document.querySelectorAll(".operator-btn");
 //
 let stringOfDigits = "";
 const formatter = new Intl.NumberFormat("en-us");
-let numberWithCommas = "";
+let operandWithCommas = "";
+let resultWithCommas = "";
 
 let operand = 0;
 let operator = "";
@@ -50,7 +51,7 @@ numBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
     appendDigit(e);
     convertToNumber(e);
-    displayNumberWithCommas(e);
+    displayNumberWithCommas(stringOfDigits);
   })
 );
 
@@ -62,17 +63,17 @@ function convertToNumber() {
   operand = parseFloat(stringOfDigits);
 }
 
-function displayNumberWithCommas() {
-  numberWithCommas = formatter.format(stringOfDigits);
+function displayNumberWithCommas(number) {
+  let numberWithCommas = formatter.format(number);
   display.textContent = numberWithCommas;
+  return numberWithCommas;
 }
 
 operatorBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
     operator = e.target.textContent;
     calculateResult();
-    displayHistory(e);
-    display.textContent = result;
+    displayHistory();
     isFirstInput = false;
   })
 );
@@ -96,17 +97,20 @@ function calculateResult() {
 function resetOperand() {
   stringOfDigits = "";
   operand = 0;
-  numberWithCommas = "";
 }
 
-function displayHistory(e) {
-  history.textContent = `${result} ${operator}`;
+function displayHistory() {
+  resultWithCommas = displayNumberWithCommas(result);
+  history.textContent = `${resultWithCommas} ${operator}`;
 }
 
 equal.addEventListener("click", () => {
-  history.textContent = `${result} ${operator} ${operand} =`;
+  resultWithCommas = displayNumberWithCommas(result);
+  operandWithCommas = displayNumberWithCommas(operand);
+  history.textContent = `${resultWithCommas} ${operator} ${operandWithCommas} =`;
   calculateResult();
-  display.textContent = result;
+  resultWithCommas = displayNumberWithCommas(result);
+  display.textContent = resultWithCommas;
 });
 
 clearBtn.addEventListener("click", (e) => {
@@ -119,26 +123,3 @@ clearBtn.addEventListener("click", (e) => {
   display.textContent = 0;
   history.textContent = 0;
 });
-
-//functional goals
-
-//display the first input number
-//press operator
-//display a "history" above the number with the result and then the operator
-//also display the result in the main display
-//when you type another number, replace the result with the new operand
-//
-
-//basicaly, the only difference in hitting an operator and the equals button is how the "history" is displayed
-//when you hit equals, the history displays the last two operands and the operator
-//if you hit just an operator, it still solves the problem, but only displays the first operand in history and
-//the second one in the main diplay
-
-//pseudo code
-
-//input number
-//press operator
-//save first input number as the result
-//
-
-//could try adding a new variable inside of the functions for first operand(result) and operand.
