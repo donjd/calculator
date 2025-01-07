@@ -71,7 +71,8 @@ operatorBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
     operator = e.target.textContent;
     calculateResult();
-    // displayHistory(e);
+    displayHistory(e);
+    display.textContent = result;
     isFirstInput = false;
   })
 );
@@ -99,16 +100,12 @@ function resetOperand() {
 }
 
 function displayHistory(e) {
-  if (isFirstInput) {
-    history.textContent = `${operand} ${operator}`;
-  } else {
-    history.textContent = `${result} ${operator}`;
-  }
+  history.textContent = `${result} ${operator}`;
 }
 
 equal.addEventListener("click", () => {
+  history.textContent = `${result} ${operator} ${operand} =`;
   calculateResult();
-  history.textContent = result;
   display.textContent = result;
 });
 
