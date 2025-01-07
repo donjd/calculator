@@ -142,3 +142,5 @@ clearBtn.addEventListener("click", () => {
   display.textContent = 0;
   history.textContent = 0;
 });
+
+//still issues when trying to use result in new calculation after hitting equals. It appends the digit instead of treating it like a new calculation.
