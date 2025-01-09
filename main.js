@@ -52,7 +52,7 @@ numBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
     appendDigit(e);
     convertToNumber(e);
-    displayNumberWithCommas(stringOfDigits);
+    display.textContent = displayNumberWithCommas(stringOfDigits);
   })
 );
 
@@ -65,8 +65,9 @@ function convertToNumber() {
 }
 
 function displayNumberWithCommas(number) {
-  let numberWithCommas = formatter.format(number);
-  display.textContent = numberWithCommas;
+  return formatter.format(number);
+  // let numberWithCommas = formatter.format(number);
+  // display.textContent = numberWithCommas;
   return numberWithCommas;
 }
 
@@ -105,6 +106,15 @@ function calculateResult() {
         resetOperand();
       } else {
         result = result * operand;
+        resetOperand();
+      }
+      break;
+    case "÷":
+      if (isFirstInput) {
+        result = operand;
+        resetOperand();
+      } else {
+        result = result / operand;
         resetOperand();
       }
       break;
