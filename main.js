@@ -81,6 +81,7 @@ operatorBtns.forEach((element) =>
 );
 
 function calculateResult() {
+  pressedEqual = false;
   switch (operator) {
     case "+":
       if (isFirstInput) {
@@ -132,14 +133,18 @@ function displayHistory() {
 }
 
 equal.addEventListener("click", () => {
-  resultWithCommas = displayNumberWithCommas(result);
-  operandWithCommas = displayNumberWithCommas(operand);
-  history.textContent = `${resultWithCommas} ${operator} ${operandWithCommas} =`;
-  calculateResult();
-  resultWithCommas = displayNumberWithCommas(result);
-  display.textContent = resultWithCommas;
-  operand = "";
-  pressedEqual = true;
+  if (pressedEqual) {
+  } else {
+    resultWithCommas = displayNumberWithCommas(result);
+    operandWithCommas = displayNumberWithCommas(operand);
+    history.textContent = `${resultWithCommas} ${operator} ${operandWithCommas} =`;
+    calculateResult();
+    resultWithCommas = displayNumberWithCommas(result);
+    display.textContent = resultWithCommas;
+    operand = 0;
+    resetOperand();
+    pressedEqual = true;
+  }
 });
 
 clearBtn.addEventListener("click", () => {
@@ -153,4 +158,18 @@ clearBtn.addEventListener("click", () => {
   history.textContent = 0;
 });
 
-//still issues when trying to use result in new calculation after hitting equals. It appends the digit instead of treating it like a new calculation.
+//press 5
+//press +
+//press 5
+//press +, this should run the previous
+
+//every time you hit a number, it should solve the problem given the result and the operator, but not display it yet.
+//Only when you hit the next operator does it display the previous result
+//result = 0
+//press 5
+//press +
+//result = 5
+//operand = 0
+//press -
+//display result
+//calculate
