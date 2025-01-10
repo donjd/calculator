@@ -165,11 +165,44 @@ clearBtn.addEventListener("click", () => {
 
 //every time you hit a number, it should solve the problem given the result and the operator, but not display it yet.
 //Only when you hit the next operator does it display the previous result
+
+//firstInput = true
 //result = 0
-//press 5
-//press +
-//result = 5
 //operand = 0
+//operator = ""
+
+//if firstInput is true
+//    press 5
+//    operand = 5
+//    press +
+//    operator = +
+//    result = 5
+//    operand = 0
+//    display result and operator in history (5 +)
+//    firstInput = false
+
+//press 6
+//operand = 6
 //press -
-//display result
-//calculate
+//calculate result (5 + 6)
+//result = 11
+//display result (11)
+//operator = -
+//display result and operator in history (11 -)
+
+//press 2
+//operand = 2
+//press x
+//calculate result (11 - 2)
+//result = 9
+//display result (9)
+//operator = x
+//display result and operator in history (9 x)
+
+//press 10
+//operand = 10
+//press =
+//display result, operator, and operand (9 x 10 =) in history
+//calculate new result (90)
+//result = 90
+//display result (30)
