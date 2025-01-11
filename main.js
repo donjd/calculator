@@ -221,3 +221,9 @@ clearBtn.addEventListener("click", () => {
 //calculate new result (90)
 //result = 90
 //display result (30)
+
+//known issues
+// - pressing an operator multiple times in a row changes the operand to 0.
+//   this isn't noticable with plus or minus since +/- 0 is still the same number.
+//   problem becomes clear when using division or multiplication.
+// - switchingn operators from a regular operator to equals doesn't work because the operand is now 0
