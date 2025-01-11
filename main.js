@@ -56,6 +56,24 @@ numBtns.forEach((element) =>
   })
 );
 
+operatorBtns.forEach((element) =>
+  element.addEventListener("click", (e) => {
+    if (isFirstInput) {
+      operator = e.target.textContent;
+      result = operand;
+      resetOperand();
+      displayHistory();
+      isFirstInput = false;
+    } else {
+      calculateResult();
+      operator = e.target.textContent;
+      displayHistory();
+      display.textContent = displayNumberWithCommas(result);
+      isFirstInput = false;
+    }
+  })
+);
+
 function appendDigit(e) {
   stringOfDigits += e.target.textContent;
 }
@@ -66,58 +84,26 @@ function convertToNumber() {
 
 function displayNumberWithCommas(number) {
   return formatter.format(number);
-  // let numberWithCommas = formatter.format(number);
-  // display.textContent = numberWithCommas;
-  return numberWithCommas;
 }
-
-operatorBtns.forEach((element) =>
-  element.addEventListener("click", (e) => {
-    operator = e.target.textContent;
-    calculateResult();
-    displayHistory();
-    isFirstInput = false;
-  })
-);
 
 function calculateResult() {
   pressedEqual = false;
   switch (operator) {
     case "+":
-      if (isFirstInput) {
-        result = operand;
-        resetOperand();
-      } else {
-        result = result + operand;
-        resetOperand();
-      }
+      result = result + operand;
+      resetOperand();
       break;
     case "-":
-      if (isFirstInput) {
-        result = operand;
-        resetOperand();
-      } else {
-        result = result - operand;
-        resetOperand();
-      }
+      result = result - operand;
+      resetOperand();
       break;
     case "x":
-      if (isFirstInput) {
-        result = operand;
-        resetOperand();
-      } else {
-        result = result * operand;
-        resetOperand();
-      }
+      result = result * operand;
+      resetOperand();
       break;
     case "÷":
-      if (isFirstInput) {
-        result = operand;
-        resetOperand();
-      } else {
-        result = result / operand;
-        resetOperand();
-      }
+      result = result / operand;
+      resetOperand();
       break;
   }
 }
@@ -158,14 +144,6 @@ clearBtn.addEventListener("click", () => {
   history.textContent = 0;
 });
 
-//press 5
-//press +
-//press 5
-//press +, this should run the previous
-
-//every time you hit a number, it should solve the problem given the result and the operator, but not display it yet.
-//Only when you hit the next operator does it display the previous result
-
 //firstInput = true
 //result = 0
 //operand = 0
@@ -184,6 +162,43 @@ clearBtn.addEventListener("click", () => {
 //press 6
 //operand = 6
 //press -
+//calculate result (5 + 6)
+//result = 11
+//display result (11)
+//operator = -
+//display result and operator in history (11 -)
+
+//press 2
+//operand = 2
+//press x
+//calculate result (11 - 2)
+//result = 9
+//display result (9)
+//operator = x
+//display result and operator in history (9 x)
+
+//press 10
+//operand = 10
+//press =
+//display result, operator, and operand (9 x 10 =) in history
+//calculate new result (90)
+//result = 90
+//display result (30)
+
+//press 5
+//operand = 5
+//press +
+
+//if firstInput is true
+//    operator = +
+//    result = 5
+//    operand = 0
+//    display result and operator in history (5 +)
+//    firstInput = false
+
+//press 6
+//operand = 6
+//press -   ----------------------- This is key. You don't want to set the operator until you calculate the previous expression.
 //calculate result (5 + 6)
 //result = 11
 //display result (11)
