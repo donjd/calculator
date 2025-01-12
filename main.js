@@ -105,7 +105,10 @@ function calculateResult() {
       result = result / operand;
       break;
     case "^":
-      for (i = 1; i < operand; i++) {}
+      let exponentOperand = result;
+      for (i = 1; i < operand; i++) {
+        result *= exponentOperand;
+      }
   }
   resetOperand();
 }
