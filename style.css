@@ -131,3 +131,7 @@ button:active {
 #equal-btn:active {
     background-color: hsl(22, 100%, 80%);
 }
+
+#clear-btn {
+    flex: 1 1 auto;
+}
