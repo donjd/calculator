@@ -60,7 +60,9 @@ operatorBtns.forEach((element) =>
   element.addEventListener("click", (e) => {
     if (isFirstInput) {
       operator = e.target.textContent;
-      result = operand;
+      if (!pressedEqual) {
+        result = operand;
+      }
       resetOperand();
       displayHistory();
       isFirstInput = false;
@@ -91,21 +93,20 @@ function calculateResult() {
   switch (operator) {
     case "+":
       result = result + operand;
-      resetOperand();
       break;
     case "-":
       result = result - operand;
-      resetOperand();
       break;
     case "x":
       result = result * operand;
-      resetOperand();
       break;
     case "÷":
       result = result / operand;
-      resetOperand();
       break;
+    case "^":
+      for (i = 1; i < operand; i++) {}
   }
+  resetOperand();
 }
 
 function resetOperand() {
@@ -127,9 +128,8 @@ equal.addEventListener("click", () => {
     calculateResult();
     resultWithCommas = displayNumberWithCommas(result);
     display.textContent = resultWithCommas;
-    operand = 0;
-    resetOperand();
     pressedEqual = true;
+    isFirstInput = true;
   }
 });
 
@@ -142,6 +142,7 @@ clearBtn.addEventListener("click", () => {
   result = 0;
   display.textContent = 0;
   history.textContent = 0;
+  pressedEqual = false;
 });
 
 //firstInput = true
@@ -226,4 +227,10 @@ clearBtn.addEventListener("click", () => {
 // - pressing an operator multiple times in a row changes the operand to 0.
 //   this isn't noticable with plus or minus since +/- 0 is still the same number.
 //   problem becomes clear when using division or multiplication.
-// - switchingn operators from a regular operator to equals doesn't work because the operand is now 0
+// - switching operators from a regular operator to equals doesn't work because the operand is now 0
+// using the decimal somehow removes the operand
+// using the result from pressing equal after multiplication or division in a new equation doesn't work
+// becasue when you hit equals, it sets the operand to 0. When you then take the result and hit +, it calculates the previous expression again
+// which is now result x 0.
+// the goal is to not let this happen because once you hit equals, there is no "previous equation" o calculate.
+// once you hit equals (pressedEquals) you shouldn't calculate on the next operator click.
