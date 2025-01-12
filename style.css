@@ -3,10 +3,6 @@ html {
     font-family: monospace;
 }
 
-body {
-    background-color: hsl(0, 0%, 10%);
-}
-
 main {
     /* border: 2px solid red; */
     display: flex;
