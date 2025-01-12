@@ -3,8 +3,7 @@ const history = document.querySelector("#input-history");
 const display = document.querySelector("#display");
 
 //row one buttons
-const leftParenthesis = document.querySelector("#left-parenthesis-btn");
-const rigthParenthesis = document.querySelector("#right-parenthesis-btn");
+const delBtn = document.querySelector("#delete-btn");
 const power = document.querySelector("#power-btn");
 const clearBtn = document.querySelector("#clear-btn");
 
@@ -148,6 +147,15 @@ clearBtn.addEventListener("click", () => {
   display.textContent = 0;
   history.textContent = 0;
   pressedEqual = false;
+});
+
+delBtn.addEventListener("click", () => {
+  stringOfDigits = stringOfDigits.slice(0, -1);
+  if (stringOfDigits == "") {
+    stringOfDigits = "0";
+  }
+  convertToNumber();
+  display.textContent = displayNumberWithCommas(stringOfDigits);
 });
 
 //firstInput = true
