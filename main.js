@@ -62,10 +62,11 @@ operatorBtns.forEach((element) =>
       operator = e.target.textContent;
       if (!pressedEqual) {
         result = operand;
+        resetOperand();
       }
-      resetOperand();
       displayHistory();
       isFirstInput = false;
+      pressedEqual = false;
     } else {
       calculateResult();
       operator = e.target.textContent;
@@ -130,6 +131,7 @@ equal.addEventListener("click", () => {
     display.textContent = resultWithCommas;
     pressedEqual = true;
     isFirstInput = true;
+    operator = "";
   }
 });
 
